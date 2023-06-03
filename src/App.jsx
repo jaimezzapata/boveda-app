@@ -10,17 +10,17 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: "/listadoContraseñas",
+    path: "/listadoContrasenas",
     element: <Listar />,
     errorElement: <Error />,
   },
   {
-    path: "/crearContarseña",
+    path: "/crearContrasena",
     element: <Crear />,
     errorElement: <Error />,
   },
   {
-    path: "/editarContraseña",
+    path: "/editarContrasena",
     element: <Editar />,
     errorElement: <Error />,
   },

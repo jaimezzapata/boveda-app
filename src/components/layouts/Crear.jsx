@@ -2,18 +2,19 @@ import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import Header from "../helpers/Header";
 import { dataBase } from "../../config/configFirebase";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const Crear = () => {
   const [nombre, setNombre] = useState("");
   const [url, setUrl] = useState("");
   const [contrasena, setContrasena] = useState("");
+  const [usuario, setUsuario] = useState("");
   const [tipo, setTipo] = useState("");
-  const [img, setImg] = useState(null);
-  const returnListado = useNavigate()
+  const [img, setImg] = useState('');
+  const returnListado = useNavigate();
 
   const agregarContrasena = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const contrasenaCollection = collection(dataBase, "contrasenas");
     const objContrasena = {
       nombre,
@@ -23,13 +24,14 @@ const Crear = () => {
       img,
     };
     await addDoc(contrasenaCollection, objContrasena);
-    returnListado('/listadoContraseñas')
+    returnListado("/listadoContrasenas");
   };
 
   return (
-    <section>
+    <section className="contenido-crear">
       <Header />
       <form onSubmit={agregarContrasena}>
+        <section className="fondo-form"></section>
         <section>
           <label htmlFor="nombre">Nombre sitio web</label>
           <input
@@ -55,6 +57,14 @@ const Crear = () => {
           />
         </section>
         <section>
+          <label htmlFor="usuario">Usuario</label>
+          <input
+            id="usuario"
+            onChange={(e) => setUsuario(e.target.value)}
+            type="password"
+          />
+        </section>
+        <section>
           <label htmlFor="tipo">Tipo sitio web</label>
           <input
             id="tipo"
@@ -65,12 +75,13 @@ const Crear = () => {
         <section>
           <label htmlFor="img">Imagen sitio Web</label>
           <input
+            className="file-select"
             id="img"
-            onChange={(e) => setImg(e.target.files[0])}
-            type="file"
+            onChange={(e) => setImg(e.target.value)}
+            type="text"
           />
         </section>
-        <input type="submit" value='Agregar Elemento' />
+        <input type="submit" value="Agregar Elemento" />
       </form>
     </section>
   );
